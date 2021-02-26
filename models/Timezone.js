@@ -1,5 +1,5 @@
 module.exports = (sequelize, type) => {
-    return sequelize.define('operation', {
+    return sequelize.define('Timezones', {
         id:{
             type: type.INTEGER,
             primaryKey: true,
