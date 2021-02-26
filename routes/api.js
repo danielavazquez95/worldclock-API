@@ -40,7 +40,16 @@ router.get('/timezones/:area/:location/:region', async (req, res) => {
 
 router.post('/timezones/dbupload', async (req, res) => {
 
-  const timezones = await Timezones.create(req.body);
+  let timezones = await Timezones.findAll({
+    where: {name : req.body.name }
+  });
+
+  if(timezones.length > 0) {
+    res.json({message: 'The name already exists'});
+    throw new Error ('The name already exists');
+  }
+
+  timezones = await Timezones.create(req.body);
   res.json(timezones);
 
 });
